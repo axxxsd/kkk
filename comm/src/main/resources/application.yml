@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    # 校园二手交易平台的数据库名
+    url: jdbc:mysql://localhost:3306/campus_second_hand?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+  servlet:
+    multipart:
+      max-file-size: 10MB   # 单文件最大10M
+      max-request-size: 100MB # 单次请求最大100M
+
+  web:
+    resources:
+      static-locations: classpath:static/,file:uploads/
+
+
+# MyBatis-Plus 配置（核心）
+mybatis-plus:
+  configuration:
+    # 打印SQL语句，在控制台能看到数据库操作，调试神器
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启驼峰命名转换（数据库字段 user_name 自动映射到 Java 属性 userName）
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      # 主键自增策略
+      id-type: auto
+  # 指定Mapper XML文件的位置（如果以后写复杂SQL会用到）
+  mapper-locations: classpath:mapper/*.xml
+  # 实体类扫描包
+  type-aliases-package: org.example.comm.entity
